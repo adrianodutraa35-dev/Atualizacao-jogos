@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Encontre as melhores promoções de jogos em Steam, Epic Games, EA, Xbox e mais. Compare preços e economize nas suas compras de games.">
+    <meta name="keywords" content="promoções jogos, steam deals, epic games promoção, xbox deals, jogos baratos, game deals">
+    <title>GameDeals Hub — Promoções de Jogos em Tempo Real</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-effects">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="main-header" class="header">
+        <div class="header-content">
+            <a href="#" class="logo" id="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+                        <path d="M8 16L14 10L20 16L14 22Z" fill="white" opacity="0.9"/>
+                        <path d="M14 16L20 10L26 16L20 22Z" fill="white" opacity="0.6"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#8B5CF6"/>
+                                <stop offset="1" stop-color="#06B6D4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">Game<span class="logo-accent">Deals</span> Hub</span>
+            </a>
+            <nav class="nav" id="main-nav">
+                <button class="nav-link active" data-section="deals" id="nav-deals">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                        <line x1="7" y1="7" x2="7.01" y2="7"/>
+                    </svg>
+                    Promoções
+                </button>
+                <button class="nav-link" data-section="search" id="nav-search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    Buscar
+                </button>
+                <button class="nav-link" data-section="free" id="nav-free">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                    </svg>
+                    Grátis
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero-section" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🎮 Atualizado em tempo real</div>
+            <h1 class="hero-title">
+                As Melhores <span class="gradient-text">Promoções</span> de Jogos
+            </h1>
+            <p class="hero-subtitle">
+                Compare preços em Real (R$) nas lojas Steam, Epic Games, EA, GOG, Humble Bundle e muito mais. 
+                Nunca mais pague caro nos seus jogos favoritos.
+            </p>
+            <div class="search-wrapper" id="hero-search-wrapper">
+                <div class="search-box">
+                    <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        class="search-input" 
+                        placeholder="Pesquise um jogo... Ex: Cyberpunk 2077, Elden Ring"
+                        autocomplete="off"
+                    >
+                    <button id="search-btn" class="search-btn">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar" id="stats-bar">
+        <div class="stat-item">
+            <span class="stat-number" id="stat-deals">—</span>
+            <span class="stat-label">Promoções Ativas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number" id="stat-stores">—</span>
+            <span class="stat-label">Lojas Monitoradas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <span class="stat-number" id="stat-max-discount">—</span>
+            <span class="stat-label">Desconto Máximo</span>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section" id="filters-section">
+        <div class="filters-container">
+            <div class="filter-group">
+                <label class="filter-label">Loja</label>
+                <div class="store-filters" id="store-filters">
+                    <button class="store-chip active" data-store="all" id="filter-all">
+                        Todas
+                    </button>
+                    <!-- Store chips will be populated dynamically -->
+                </div>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Ordenar por</label>
+                <select id="sort-select" class="filter-select">
+                    <option value="Deal Rating">Relevância</option>
+                    <option value="Savings">Maior Desconto</option>
+                    <option value="Price">Menor Preço</option>
+                    <option value="Title">Nome (A-Z)</option>
+                    <option value="recent">Mais Recentes</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Preço Máximo</label>
+                <div class="price-range-wrapper">
+                    <input type="range" id="price-range" class="price-range" min="0" max="60" value="60" step="5">
+                    <span class="price-range-value" id="price-range-value">Qualquer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <!-- Deals Section -->
+        <section id="deals-section" class="content-section active">
+            <div class="section-header">
+                <h2 class="section-title">🔥 Promoções em Destaque</h2>
+                <span class="section-count" id="deals-count"></span>
+            </div>
+            <div class="deals-grid" id="deals-grid">
+                <!-- Cards will be populated by JS -->
+            </div>
+            <div class="loading" id="loading-deals">
+                <div class="loading-spinner"></div>
+                <p>Buscando as melhores promoções...</p>
+            </div>
+            <div class="empty-state hidden" id="empty-deals">
+                <div class="empty-icon">🎮</div>
+                <h3>Nenhuma promoção encontrada</h3>
+                <p>Tente ajustar os filtros ou busque por outro jogo.</p>
+            </div>
+            <div class="load-more-wrapper" id="load-more-wrapper">
+                <button id="load-more-btn" class="load-more-btn">
+                    Carregar mais promoções
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section id="search-section" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title" id="search-title">🔍 Resultados da Busca</h2>
+                <span class="section-count" id="search-count"></span>
+            </div>
+            <div class="deals-grid" id="search-grid">
+                <!-- Search results will be populated by JS -->
+            </div>
+            <div class="loading hidden" id="loading-search">
+                <div class="loading-spinner"></div>
+                <p>Procurando jogos...</p>
+            </div>
+            <div class="empty-state hidden" id="empty-search">
+                <div class="empty-icon">🔍</div>
+                <h3>Nenhum jogo encontrado</h3>
+                <p>Tente buscar com outro nome ou verifique a ortografia.</p>
+            </div>
+        </section>
+
+        <!-- Free Games Section -->
+        <section id="free-section" class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">⭐ Jogos Gratuitos</h2>
+                <span class="section-count" id="free-count"></span>
+            </div>
+            <div class="deals-grid" id="free-grid">
+                <!-- Free games will be populated by JS -->
+            </div>
+            <div class="loading hidden" id="loading-free">
+                <div class="loading-spinner"></div>
+                <p>Buscando jogos gratuitos...</p>
+            </div>
+            <div class="empty-state hidden" id="empty-free">
+                <div class="empty-icon">⭐</div>
+                <h3>Nenhum jogo gratuito no momento</h3>
+                <p>Volte mais tarde para conferir novas ofertas.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer" class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-text">Game<span class="logo-accent">Deals</span> Hub</span>
+                <p class="footer-desc">Comparador de preços de jogos em tempo real. Dados fornecidos pela API CheapShark.</p>
+            </div>
+            <div class="footer-stores">
+                <h4>Lojas Monitoradas</h4>
+                <div class="footer-store-list" id="footer-store-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 GameDeals Hub. Preços atualizados em tempo real via CheapShark API.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="back-to-top" class="back-to-top" aria-label="Voltar ao topo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>
