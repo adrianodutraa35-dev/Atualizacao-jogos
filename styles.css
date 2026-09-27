@@ -1146,121 +1146,764 @@ body {
 .deal-card:nth-child(12) { animation-delay: 0.24s; }
 
 /* ===========================
+   Mobile Menu Button
+   =========================== */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 110;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition-normal);
+    transform-origin: center;
+}
+
+/* Hamburger -> X animation */
+.mobile-menu-btn.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ===========================
    Responsive Design
    =========================== */
+
+/* --- Tablet & Small Desktop (max-width: 768px) --- */
 @media (max-width: 768px) {
+    :root {
+        --header-height: 60px;
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    /* Navigation - Mobile Overlay */
+    .nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100vh;
+        height: 100dvh;
+        flex-direction: column;
+        gap: 4px;
+        padding: 80px 20px 32px;
+        background: rgba(10, 10, 15, 0.97);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-left: 1px solid var(--border-color);
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.5);
+        z-index: 105;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+    }
+
+    .nav.open {
+        transform: translateX(0);
+    }
+
+    .nav-link {
+        padding: 14px 18px;
+        font-size: 1rem;
+        border-radius: var(--radius-md);
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .nav-link svg {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+    }
+
+    .nav-link.active::after {
+        display: none;
+    }
+
+    .nav-link.active {
+        background: rgba(139, 92, 246, 0.15);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+    }
+
+    /* Mobile overlay backdrop */
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 104;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+
+    .nav-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Header */
     .header-content {
         padding: 0 16px;
     }
-    
-    .nav {
-        gap: 2px;
+
+    .logo-icon svg {
+        width: 28px;
+        height: 28px;
     }
-    
-    .nav-link {
-        padding: 6px 12px;
-        font-size: 0.82rem;
+
+    .logo-text {
+        font-size: 1.15rem;
     }
-    
-    .nav-link svg {
-        display: none;
-    }
-    
+
+    /* Hero */
     .hero {
-        padding-top: calc(var(--header-height) + 36px);
-        padding-bottom: 24px;
+        padding-top: calc(var(--header-height) + 32px);
+        padding-bottom: 20px;
     }
-    
+
     .hero-content {
         padding: 0 16px;
     }
-    
+
+    .hero-badge {
+        font-size: 0.8rem;
+        padding: 6px 16px;
+        margin-bottom: 18px;
+    }
+
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.9rem;
+        margin-bottom: 14px;
     }
-    
+
     .hero-subtitle {
-        font-size: 0.95rem;
+        font-size: 0.92rem;
+        margin-bottom: 24px;
+        line-height: 1.65;
     }
-    
+
+    /* Search */
     .search-box {
-        flex-direction: row;
+        padding: 5px 5px 5px 14px;
+        gap: 8px;
+        border-radius: var(--radius-md);
     }
-    
+
+    .search-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .search-input {
+        font-size: 0.92rem;
+        padding: 10px 0;
+    }
+
+    .search-input::placeholder {
+        font-size: 0.85rem;
+    }
+
     .search-btn {
         padding: 10px 20px;
         font-size: 0.88rem;
+        border-radius: var(--radius-sm);
     }
-    
+
+    /* Stats Bar */
     .stats-bar {
         gap: 20px;
         padding: 16px;
     }
-    
+
     .stat-number {
-        font-size: 1.4rem;
+        font-size: 1.35rem;
     }
-    
+
+    .stat-label {
+        font-size: 0.7rem;
+    }
+
     .stat-divider {
-        height: 30px;
+        height: 28px;
     }
-    
+
+    /* Filters */
+    .filters-section {
+        padding: 0 16px 20px;
+    }
+
     .filters-container {
         padding: 16px;
         gap: 16px;
+        flex-direction: column;
+        align-items: stretch;
     }
-    
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-group:first-child {
+        min-width: unset;
+    }
+
+    /* Horizontal scroll for store chips on mobile */
     .store-filters {
-        gap: 4px;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 6px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 6px;
+        margin: 0 -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        scrollbar-width: none;
     }
-    
+
+    .store-filters::-webkit-scrollbar {
+        display: none;
+    }
+
     .store-chip {
-        padding: 5px 10px;
-        font-size: 0.78rem;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        padding: 8px 14px;
+        font-size: 0.8rem;
     }
-    
+
+    /* Filter row for sort + price */
+    .filter-group:nth-child(2),
+    .filter-group:nth-child(3) {
+        flex: 1;
+    }
+
+    .filters-container > .filter-group:nth-child(2),
+    .filters-container > .filter-group:nth-child(3) {
+        display: inline-flex;
+        flex-direction: column;
+    }
+
+    .filter-select {
+        width: 100%;
+        padding: 12px 36px 12px 14px;
+        font-size: 0.9rem;
+    }
+
+    .price-range {
+        width: 100%;
+        flex: 1;
+    }
+
+    .price-range-wrapper {
+        width: 100%;
+    }
+
+    /* Main Content */
     .main-content {
         padding: 0 16px 40px;
     }
-    
+
+    .section-header {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    /* Deals Grid - 2 columns on tablet */
     .deals-grid {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 14px;
     }
-    
+
+    /* Card adjustments */
+    .deal-card-image {
+        height: 120px;
+    }
+
+    .deal-card-body {
+        padding: 14px 14px 16px;
+    }
+
+    .deal-title {
+        font-size: 0.92rem;
+    }
+
+    .deal-current-price {
+        font-size: 1.15rem;
+    }
+
+    .deal-cta {
+        padding: 10px 14px;
+        font-size: 0.8rem;
+    }
+
+    /* Load More */
+    .load-more-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+    }
+
+    /* Footer */
     .footer-content {
         flex-direction: column;
         gap: 28px;
         padding: 32px 16px 24px;
     }
-}
 
-@media (max-width: 480px) {
-    .logo-text {
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    .footer-store-list {
+        gap: 6px;
+    }
+
+    .footer-store-tag {
+        font-size: 0.72rem;
+        padding: 4px 10px;
+    }
+
+    .footer-bottom {
+        padding: 16px;
+    }
+
+    .footer-bottom p {
+        font-size: 0.75rem;
+    }
+
+    /* Back to Top */
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+    }
+
+    /* Loading & Empty States */
+    .loading {
+        padding: 40px 16px;
+    }
+
+    .empty-state {
+        padding: 50px 16px;
+    }
+
+    .empty-icon {
+        font-size: 2.8rem;
+    }
+
+    .empty-state h3 {
         font-size: 1.1rem;
     }
-    
-    .hero-title {
-        font-size: 1.7rem;
+}
+
+/* --- Mobile (max-width: 480px) --- */
+@media (max-width: 480px) {
+    :root {
+        --header-height: 56px;
     }
-    
+
+    .logo-text {
+        font-size: 1.05rem;
+    }
+
+    .logo-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .logo {
+        gap: 8px;
+    }
+
+    /* Hero */
+    .hero {
+        padding-top: calc(var(--header-height) + 24px);
+        padding-bottom: 16px;
+    }
+
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 5px 14px;
+        margin-bottom: 14px;
+    }
+
+    .hero-title {
+        font-size: 1.55rem;
+        line-height: 1.2;
+        margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+
+    /* Search - stack on very small screens */
+    .search-box {
+        flex-direction: column;
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .search-icon {
+        display: none;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+        text-align: center;
+    }
+
+    .search-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    /* Stats */
+    .stats-bar {
+        gap: 14px;
+        padding: 12px 8px;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+
+    .stat-divider {
+        height: 24px;
+    }
+
+    /* Filters */
+    .filters-container {
+        padding: 12px;
+        gap: 14px;
+    }
+
+    .store-chip {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    .filter-select {
+        font-size: 0.85rem;
+        padding: 10px 32px 10px 12px;
+    }
+
+    .price-range-value {
+        font-size: 0.8rem;
+        min-width: 50px;
+    }
+
+    /* Grid - single column */
     .deals-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
     }
-    
-    .search-box {
-        padding: 4px 4px 4px 14px;
+
+    /* Card */
+    .deal-card-image {
+        height: 130px;
     }
-    
-    .search-btn {
-        padding: 10px 16px;
+
+    .deal-card-body {
+        padding: 12px;
     }
-    
-    .price-range {
-        width: 80px;
+
+    .deal-title {
+        font-size: 0.9rem;
+        -webkit-line-clamp: 2;
     }
-    
-    .filter-select {
-        max-width: 140px;
+
+    .deal-meta {
+        margin-bottom: 10px;
+    }
+
+    .deal-pricing {
+        padding-top: 12px;
+    }
+
+    .deal-current-price {
+        font-size: 1.1rem;
+    }
+
+    .deal-original-price {
+        font-size: 0.78rem;
+    }
+
+    .deal-cta {
+        padding: 10px 12px;
+        font-size: 0.78rem;
+    }
+
+    .deal-badge {
+        top: 8px;
+        right: 8px;
+        padding: 3px 10px;
+        font-size: 0.7rem;
+    }
+
+    .deal-store-badge {
+        top: 8px;
+        left: 8px;
+        padding: 3px 8px 3px 5px;
+    }
+
+    .deal-store-badge img {
+        width: 14px;
+        height: 14px;
+    }
+
+    .deal-store-badge span {
+        font-size: 0.68rem;
+    }
+
+    /* Section */
+    .section-title {
+        font-size: 1.1rem;
+    }
+
+    .section-count {
+        font-size: 0.72rem;
+        padding: 3px 10px;
+    }
+
+    /* Load More */
+    .load-more-btn {
+        font-size: 0.88rem;
+        padding: 12px 20px;
+    }
+
+    /* Footer */
+    .footer-content {
+        padding: 24px 12px 20px;
+        gap: 20px;
+    }
+
+    .footer-brand .logo-text {
+        font-size: 1.05rem;
+    }
+
+    .footer-desc {
+        font-size: 0.82rem;
+    }
+
+    .footer-stores h4 {
+        font-size: 0.85rem;
+    }
+
+    .footer-bottom {
+        padding: 14px 12px;
+    }
+
+    .footer-bottom p {
+        font-size: 0.72rem;
+    }
+
+    /* Back to Top */
+    .back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .back-to-top svg {
+        width: 16px;
+        height: 16px;
     }
 }
+
+/* --- Very Small Mobile (max-width: 360px) --- */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 1.35rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .stat-number {
+        font-size: 1.05rem;
+    }
+
+    .stat-label {
+        font-size: 0.6rem;
+    }
+
+    .deal-card-body {
+        padding: 10px;
+    }
+
+    .deal-title {
+        font-size: 0.85rem;
+    }
+
+    .deal-current-price {
+        font-size: 1rem;
+    }
+
+    .deal-cta {
+        padding: 8px 10px;
+        font-size: 0.75rem;
+    }
+}
+
+/* ===========================
+   Touch Device Optimizations
+   =========================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects that don't work well on touch */
+    .deal-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .deal-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+
+    /* Make touch targets larger */
+    .store-chip {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-link {
+        min-height: 44px;
+    }
+
+    .deal-cta {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .search-btn {
+        min-height: 44px;
+    }
+
+    .load-more-btn {
+        min-height: 48px;
+    }
+
+    .filter-select {
+        min-height: 44px;
+    }
+
+    /* Disable hover animations on touch */
+    .search-btn:hover,
+    .load-more-btn:hover,
+    .deal-cta:hover {
+        transform: none;
+    }
+
+    .search-btn:active,
+    .load-more-btn:active,
+    .deal-cta:active {
+        transform: scale(0.97);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* ===========================
+   Landscape Mobile
+   =========================== */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding-top: calc(var(--header-height) + 16px);
+        padding-bottom: 12px;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 16px;
+    }
+
+    .hero-badge {
+        margin-bottom: 12px;
+    }
+
+    .stats-bar {
+        padding: 12px;
+    }
+
+    .deals-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+/* ===========================
+   Safe Area (notch devices)
+   =========================== */
+@supports (padding: env(safe-area-inset-top)) {
+    .header {
+        padding-top: env(safe-area-inset-top);
+        height: calc(var(--header-height) + env(safe-area-inset-top));
+    }
+
+    .nav {
+        padding-top: calc(80px + env(safe-area-inset-top));
+    }
+
+    .back-to-top {
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        right: calc(16px + env(safe-area-inset-right));
+    }
+
+    .footer-bottom {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+}
+

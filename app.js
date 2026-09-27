@@ -64,6 +64,9 @@
 
     const els = {
         header: $('#main-header'),
+        nav: $('#main-nav'),
+        navOverlay: $('#nav-overlay'),
+        mobileMenuBtn: $('#mobile-menu-btn'),
         searchInput: $('#search-input'),
         searchBtn: $('#search-btn'),
         storeFilters: $('#store-filters'),
@@ -479,10 +482,30 @@
     // Event Handlers
     // ===========================
     function initEventListeners() {
+        // Mobile Menu
+        if (els.mobileMenuBtn && els.nav && els.navOverlay) {
+            const toggleMenu = () => {
+                els.mobileMenuBtn.classList.toggle('active');
+                els.nav.classList.toggle('open');
+                els.navOverlay.classList.toggle('active');
+                document.body.style.overflow = els.nav.classList.contains('open') ? 'hidden' : '';
+            };
+
+            els.mobileMenuBtn.addEventListener('click', toggleMenu);
+            els.navOverlay.addEventListener('click', toggleMenu);
+        }
+
         // Navigation
         $$('.nav-link').forEach(btn => {
             btn.addEventListener('click', () => {
                 switchSection(btn.dataset.section);
+                // Close menu on mobile after click
+                if (window.innerWidth <= 768 && els.nav && els.nav.classList.contains('open')) {
+                    els.mobileMenuBtn.classList.remove('active');
+                    els.nav.classList.remove('open');
+                    els.navOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             });
         });
 
